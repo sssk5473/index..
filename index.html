@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로필 카드 - 이석민</title>
+  <style>
+    /* 기본 여백 초기화 및 박스 모델 설정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 전체 화면 레이아웃: 보라색 그라데이션 배경 및 카드 정중앙 배치 */
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+      color: #1f2937;
+    }
+
+    /* 흰색 둥근 프로필 카드 컨테이너 */
+    .profile-card {
+      width: 100%;
+      max-width: 380px;
+      background-color: #ffffff;
+      border-radius: 28px;
+      padding: 44px 32px 36px;
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(31, 20, 66, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* 카드 전체에 살짝 떠오르는 입체감 부여 */
+    .profile-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(31, 20, 66, 0.32);
+    }
+
+    /* 상단 큰 원형 이미지 플레이스홀더 (회색 동그라미) */
+    .avatar-placeholder {
+      width: 128px;
+      height: 128px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background-color: #e5e7eb;
+      border: 4px solid #f3f4f6;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 플레이스홀더 내부의 은은한 실루엣 효과 (순수 CSS) */
+    .avatar-placeholder::before {
+      content: "";
+      width: 44px;
+      height: 44px;
+      background-color: #cbd5e1;
+      border-radius: 50%;
+      position: absolute;
+      top: 26px;
+    }
+
+    .avatar-placeholder::after {
+      content: "";
+      width: 84px;
+      height: 48px;
+      background-color: #cbd5e1;
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      bottom: -8px;
+    }
+
+    /* 이름 스타일 및 마우스 호버 시 색상 변경 효과 */
+    .profile-name {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #111827;
+      margin-bottom: 10px;
+      display: inline-block;
+      cursor: pointer;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .profile-name:hover {
+      color: #764ba2;
+      transform: scale(1.03);
+    }
+
+    /* 한 줄 소개 텍스트 */
+    .profile-bio {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #6b7280;
+      margin-bottom: 28px;
+      word-break: keep-all;
+    }
+
+    /* 구분선 */
+    .divider {
+      height: 1px;
+      background-color: #f3f4f6;
+      margin-bottom: 24px;
+    }
+
+    /* 섹션 소제목 */
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+
+    /* 좋아하는 것 3가지 리스트 */
+    .favorites-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .favorite-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background-color: #f8fafc;
+      border: 1px solid #f1f5f9;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #374151;
+      text-align: left;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .favorite-item:hover {
+      background-color: #f3e8ff;
+      border-color: #e9d5ff;
+    }
+
+    .favorite-emoji {
+      font-size: 1.25rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* 모바일 작은 화면 대응 */
+    @media (max-width: 400px) {
+      .profile-card {
+        padding: 36px 22px 28px;
+        border-radius: 24px;
+      }
+
+      .avatar-placeholder {
+        width: 112px;
+        height: 112px;
+      }
+
+      .profile-name {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 메인 프로필 카드 -->
+  <main class="profile-card">
+    <!-- 상단 원형 이미지 플레이스홀더 -->
+    <div class="avatar-placeholder" role="img" aria-label="프로필 이미지 플레이스홀더"></div>
+
+    <!-- 이름 (호버 시 색상 변경) -->
+    <h1 class="profile-name">이석민</h1>
+
+    <!-- 한 줄 소개 -->
+    <p class="profile-bio">새로운 기술을 탐구하는 학생입니다.</p>
+
+    <div class="divider"></div>
+
+    <!-- 좋아하는 것 3가지 -->
+    <p class="section-title">Favorites</p>
+    <ul class="favorites-list">
+      <li class="favorite-item">
+        <span class="favorite-emoji" aria-hidden="true">☕</span>
+        <span>고기</span>
+      </li>
+      <li class="favorite-item">
+        <span class="favorite-emoji" aria-hidden="true">🎧</span>
+        <span> 음악 감상</span>
+      </li>
+      <li class="favorite-item">
+        <span class="favorite-emoji" aria-hidden="true">🏃‍♂️</span>
+        <span>볼링</span>
+      </li>
+    </ul>
+  </main>
+
+</body>
+</html>
